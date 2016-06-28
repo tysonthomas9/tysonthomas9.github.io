@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://tysonthomas9.github.io/404.html">
+    <link rel="canonical" href="https://tysonthomas.me/404.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -46,8 +46,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- ga & ba script hoook -->
-    <script></script>
+    <!-- Google Analytics -->
+    
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-79993355-1', 'auto');
+        ga('send', 'pageview');
+      </script>
+    
+
 </head>
 
 
@@ -88,14 +99,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -261,7 +272,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("https://tysonthomas9.github.io/js/jquery.tagcloud.js",function(){
+        async("https://tysonthomas.me/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -278,11 +289,6 @@
         if($nav) FastClick.attach($nav);
     })
 </script>
-
-
-<!-- Google Analytics -->
-
-
 
 
 <!-- Baidu Tongji -->
