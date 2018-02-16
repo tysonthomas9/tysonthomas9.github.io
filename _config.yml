@@ -35,7 +35,7 @@ zhihu_username:
 github_username:    tysonthomas9
 twitter_username:   tysonthomas90
 facebook_username:
-linkedin_username:
+linkedin_username:  tysonthomas9
 
 # Build settings
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
