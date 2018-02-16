@@ -47,6 +47,9 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
+
+    <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/justifiedGallery.min.css" />
     <script></script>
 </head>
 
@@ -153,7 +156,7 @@
 
     <!-- Main Content -->
     <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+<header class="intro-header" style="background-image: url('/img/travel/colorado-1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
@@ -397,6 +400,24 @@
     })
 </script>
 
+<!-- lightgallery plugins -->
+<script src="/js/picturefill.min.js"></script>
+<script src="/js/lightgallery.js"></script>
+<script src="/js/lg-pager.js"></script>
+<script src="/js/lg-autoplay.js"></script>
+<script src="/js/lg-fullscreen.js"></script>
+<script src="/js/lg-zoom.js"></script>
+<script src="/js/lg-hash.js"></script>
+<script src="/js/lg-share.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+<script type="text/javascript">
+  lightGallery(document.getElementById('travel-images'), {
+    thumbnail:true,
+    selector: '.item-travel-image'
+  });
+  $("#travel-images").justifiedGallery();
+</script>
 
 <!-- Google Analytics -->
 

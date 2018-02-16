@@ -47,6 +47,9 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
+
+    <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/justifiedGallery.min.css" />
     <script></script>
 </head>
 
@@ -189,7 +192,6 @@
 <!-- Chinese Version -->
 <div class="zh post-container">
     <h3 id="CASPEN-Technologies-Co-Founder"><a href="#CASPEN-Technologies-Co-Founder" class="headerlink" title="CASPEN Technologies - Co Founder"></a>CASPEN Technologies - Co Founder</h3><p style="text-align: justify"><br>CASPEN Computational Fluid Dynamics (CFD) cloud platform is for solving various engineering problems such as complex fluid flows inside machines, to aero flow anaylsis across the body of objects. It is developed using custom open source numerical solvers, and pre/post processing utilities for the solution of these continuum mechanics problems.<br></p>
-
 
 <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/1XK8jDJMae0?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -400,6 +402,24 @@
     })
 </script>
 
+<!-- lightgallery plugins -->
+<script src="/js/picturefill.min.js"></script>
+<script src="/js/lightgallery.js"></script>
+<script src="/js/lg-pager.js"></script>
+<script src="/js/lg-autoplay.js"></script>
+<script src="/js/lg-fullscreen.js"></script>
+<script src="/js/lg-zoom.js"></script>
+<script src="/js/lg-hash.js"></script>
+<script src="/js/lg-share.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+<script type="text/javascript">
+  lightGallery(document.getElementById('travel-images'), {
+    thumbnail:true,
+    selector: '.item-travel-image'
+  });
+  $("#travel-images").justifiedGallery();
+</script>
 
 <!-- Google Analytics -->
 
