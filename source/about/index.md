@@ -3,7 +3,7 @@ layout: "about"
 title: "About"
 date: 2016-04-21 04:48:33
 description: "Hey, thanks for dropping by!"
-header-img: "img/about-bg.jpg"
+header-img: "img/travel/colorado-1.jpg"
 ---
 
 <p style="text-align: justify">
