@@ -55,8 +55,8 @@ header-img: "img/travel/sf-2.jpg"
   <div class="item-travel-image" data-src="/img/travel/lake.jpg" style="cursor: pointer;">
       <img src="/img/travel/lake.jpg" />
   </div>
-  <div class="item-travel-image" data-src="/img/travel/grand-canyon-1.jpg" style="cursor: pointer;">
-      <img src="/img/travel/grand-canyon-1.jpg" />
+  <div class="item-travel-image" data-src="/img/travel/grand-canyon-1.jpg" style="cursor: pointer;"  data-sub-html="<h4>Grand Canyon</h4><p>The stunning view of the Grand Canyon.</p>" >
+      <img src="/img/travel/grand-canyon-1.jpg"  data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>" />
   </div>
   <div class="item-travel-image" data-src="/img/travel/grand-canyon-2.jpg" style="cursor: pointer;">
       <img src="/img/travel/grand-canyon-2.jpg" />
