@@ -20,7 +20,7 @@ CASPEN Computational Fluid Dynamics (CFD) cloud platform is for solving various 
 
 ### Blog 2 Skill - 2017
 <p style="text-align: justify">
-This was an app I developed for a client which generates alexa specific feed by using a site's RSS feed. The app uses ReactJS in the frontend. The backend technologies used are AWS Lambda, API Gateway, DynamoDB. The application is currently hosted here
+This was an app I developed for a client which generates Alexa specific feed by using a site's RSS feed. The app uses ReactJS in the frontend. The backend technologies used are AWS Lambda, API Gateway, DynamoDB. The application is currently hosted here
 </p>
 
 [Blog 2 Skill](https://app.blog2skill.com)
@@ -54,7 +54,7 @@ This was an app I developed for a client which generates alexa specific feed by 
 
 ### Smart Marketing Tribe - 2016
 <p style="text-align: justify">
-An education tool for digital marketing users developed for a client. Its a hybrid application built on Ionic 2, using firebase as data store.
+An education tool for digital marketing users developed for a client. Its a hybrid application built on Ionic 2, using firebase as the data store.
 </p>
 
 [Android App](https://play.google.com/store/apps/details?id=com.ionicframework.emailauthfirebasesdk526086)
