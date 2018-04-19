@@ -105,14 +105,14 @@
 
                         
                         <li>
-                            <a href="/travel/">Travel</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/travel/">Travel</a>
                         </li>
                         
                     
@@ -417,6 +417,23 @@
     selector: '.item-travel-image'
   });
   $("#travel-images").justifiedGallery();
+  lightGallery(document.getElementById('b2s-images'), {
+    thumbnail:true,
+    selector: '.item-b2s-image'
+  });
+  $("#b2s-images").justifiedGallery();
+
+  lightGallery(document.getElementById('smt-images'), {
+    thumbnail:true,
+    selector: '.item-smt-image'
+  });
+  $("#smt-images").justifiedGallery();
+
+  lightGallery(document.getElementById('aa-images'), {
+    thumbnail:true,
+    selector: '.item-aa-image'
+  });
+  $("#aa-images").justifiedGallery();
 </script>
 
 <!-- Google Analytics -->
