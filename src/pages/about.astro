@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Content as AboutIntro } from '../content/about.md';
+import { about } from '../lib/about';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+
+const heroes = await Promise.all(
+  about.projects.map(async (p) => {
+    if (!p.post) return undefined;
+    const entry = await getEntry('blog', p.post);
+    if (!entry?.data.hero) return undefined;
+    return { src: entry.data.hero, alt: entry.data.heroAlt ?? '' };
+  }),
+);
+
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+<BaseLayout title="About" description="Tyson Thomas is an engineer with a passion for AI, robotics and software development.">
+  <!-- Edit src/content/about.md: it feeds both this page and /about.md. -->
+  <div class="mx-auto max-w-page px-5 sm:px-8">
+    <section class="grid gap-10 pt-16 pb-14 sm:pt-24 md:grid-cols-[1fr_15rem] md:items-start">
+      <div>
+        <p class="label">Sheet 02 · About</p>
+        <h1
+          class="mt-4 max-w-[16ch] font-serif text-[clamp(2.4rem,7vw,4.2rem)] leading-[1.04] font-semibold tracking-tight text-balance"
+        >
+          {about.headline.replace(/work\.$/, '')}<span class="text-signal">work.</span>
+        </h1>
+        <div class="about-intro mt-8 max-w-prose">
+          <AboutIntro />
+        </div>
+      </div>
+
+      <dl class="frame font-mono text-xs md:mt-10" aria-label="Quick facts">
+        <div class="border-b border-rule px-3 py-2">
+          <dt class="text-ink-3">Engineer</dt>
+          <dd class="mt-0.5">AI · Robotics · Software</dd>
+        </div>
+        <div class="border-b border-rule px-3 py-2">
+          <dt class="text-ink-3">Building now</dt>
+          <dd class="mt-0.5">Agents, and a robot to run one</dd>
+        </div>
+        <div class="px-3 py-2">
+          <dt class="text-ink-3">Find me</dt>
+          <dd class="mt-1 flex flex-wrap gap-2">
+            {about.links.map((l) => <a href={l.href} class="tag hover:bg-paper-raised">{l.label} ↗</a>)}
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="build" class="border-t-[1.25px] border-ink pt-8">
+      <div class="mb-6 flex items-baseline justify-between gap-4">
+        <h2 id="build" class="label">What I build</h2>
+        <p class="label text-ink-3" aria-hidden="true">Parts list</p>
+      </div>
+      <ol class="grid gap-5 md:grid-cols-2">
+        {
+          about.projects.map((p, i) => (
+            <li>
+              <article class="frame group relative flex h-full flex-col p-5 transition-colors hover:bg-paper-raised sm:p-6">
+                <div class="label flex justify-between gap-3">
+                  <span>P-{String(i + 1).padStart(2, '0')}</span>
+                  <span class="text-signal">{p.kind}</span>
+                </div>
+                <h3 class="mt-3 font-serif text-2xl leading-snug font-semibold">
+                  <a
+                    href={p.href}
+                    class="text-ink no-underline after:absolute after:inset-0 group-hover:underline"
+                    {...(isExternal(p.href) ? { rel: 'noopener' } : {})}
+                  >
+                    {p.name}
+                  </a>
+                  <span class="ml-1 font-mono text-base text-accent" aria-hidden="true">
+                    {isExternal(p.href) ? '↗' : '→'}
+                  </span>
+                </h3>
+                <p class="mt-2 flex-1 text-ink-2">{p.summary}</p>
+                {heroes[i] && (
+                  <Image
+                    src={heroes[i].src}
+                    alt={heroes[i].alt}
+                    widths={[480, 960]}
+                    sizes="(min-width: 768px) 30rem, 100vw"
+                    class="mt-4 h-auto w-full border border-rule"
+                  />
+                )}
+                {p.video && (
+                  <div class="relative z-10 mt-4 aspect-video overflow-hidden border border-rule">
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${p.video}`}
+                      title={`${p.name} demo video`}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen
+                      class="h-full w-full"
+                    />
+                  </div>
+                )}
+                <div class="mt-4 flex flex-wrap items-center gap-2">
+                  <ul class="flex flex-wrap gap-2" aria-label="Tags">
+                    {p.tags.map((t) => <li class="tag">{t}</li>)}
+                  </ul>
+                  {p.code && (
+                    <a href={p.code} rel="noopener" class="relative z-10 ml-auto font-mono text-xs">
+                      Tech write-up ↗
+                    </a>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section aria-labelledby="earlier" class="mt-16 grid gap-4 border-t border-dashed border-rule pt-8 md:grid-cols-[15rem_1fr]">
+      <h2 id="earlier" class="label">Earlier work</h2>
+      <p class="max-w-prose text-ink-2">{about.earlier}</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-intro :global(p) {
+    font-size: 1.2rem;
+    line-height: 1.65;
+  }
+  .about-intro :global(p + p) {
+    margin-top: 1rem;
+  }
+  .about-intro :global(p:first-child) {
+    color: var(--ink);
+  }
+  .about-intro :global(p:not(:first-child)) {
+    color: var(--ink-2);
+  }
+</style>

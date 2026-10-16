@@ -1,0 +1,15 @@
+---
+import { SITE_TITLE } from '../consts';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-rule">
+  <div
+    class="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 px-5 py-8 font-mono text-xs text-ink-3 sm:px-8"
+  >
+    <p>© {year} {SITE_TITLE}</p>
+    <p class="flex gap-4">
+      <a href="/rss.xml" class="text-ink-2">RSS</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="This page could not be found." noindex>
+  <div class="mx-auto max-w-prose px-5 pt-16 sm:px-0 sm:pt-24">
+    <p class="label">Error · 404</p>
+    <h1 class="mt-4 font-serif text-[clamp(2.2rem,6vw,3.2rem)] leading-tight font-semibold tracking-tight">
+      Not on this drawing
+    </h1>
+    <p class="mt-4 text-lg text-ink-2">
+      The page you were looking for doesn't exist, or it moved when the site was rebuilt.
+    </p>
+    <p class="mt-8 font-mono text-sm"><a href="/">← Back to the index</a></p>
+  </div>
+</BaseLayout>

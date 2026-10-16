@@ -1,0 +1,386 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/literata/opsz.css';
+@import '@fontsource-variable/literata/opsz-italic.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+/* Dark mode follows the `data-theme` attribute set on <html> (see BaseHead). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Blueprint design tokens.
+ * Plain light paper (grid lives only in the figures), one dark ink, thin rules, mono labels, serif text.
+ * Raw values live in CSS variables so the dark theme can swap them;
+ * Tailwind utilities (bg-paper, text-ink, border-rule, font-mono, ...) read them.
+ */
+:root {
+  --paper: #f6f7f5;
+  --paper-raised: #f8f6f0;
+  --ink: #1f2023;
+  --ink-2: #55555a;
+  --ink-3: #6a6a6e;
+  --rule: rgba(31, 32, 35, 0.22);
+  --grid: rgba(31, 32, 35, 0.07);
+  --accent: #1c5cab;
+  --signal: #a8431a;
+  --code-bg: #e9e5da;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  /* Graphite: soft near-black sheet, neutral grey ink, no blue cast. */
+  --paper: #111112;
+  --paper-raised: #19191b;
+  --ink: #ececea;
+  --ink-2: #a9a9a6;
+  --ink-3: #8a8a87;
+  --rule: rgba(236, 236, 234, 0.16);
+  --grid: rgba(236, 236, 234, 0.06);
+  --accent: #9cc4f2;
+  --signal: #f0a070;
+  --code-bg: #232326;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-grid: var(--grid);
+  --color-accent: var(--accent);
+  --color-signal: var(--signal);
+  --color-code: var(--code-bg);
+
+  --font-serif: 'Literata Variable', Literata, Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --font-sans: var(--font-serif);
+
+  --radius-blueprint: 3px;
+  --container-prose: 68ch;
+  --container-page: 72rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--paper);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 1.075rem;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: var(--accent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small uppercase mono label, like a drawing's title block. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Thin-ruled box with tiny corner radius. */
+  .frame {
+    border: 1.25px solid var(--ink);
+    border-radius: var(--radius-blueprint);
+    background: var(--paper);
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    color: var(--ink);
+    background: var(--paper);
+    text-decoration: none;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -10rem;
+    z-index: 50;
+    padding: 0.5rem 0.75rem;
+    background: var(--paper);
+    border: 1.25px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Post body: one reading column (~68ch); figures and tables go wider. */
+  /* ------------------------------------------------------------------ */
+  .post-body {
+    font-size: 1.075rem;
+    line-height: 1.7;
+  }
+  .post-body > * + * {
+    margin-top: 1.1rem;
+  }
+  .post-body h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: 3.2rem;
+    text-wrap: balance;
+  }
+  .post-body h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin-top: 2.2rem;
+  }
+  .post-body h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.075rem;
+    line-height: 1.4;
+    margin-top: 1.8rem;
+  }
+  .post-body h2 + *,
+  .post-body h3 + *,
+  .post-body h4 + * {
+    margin-top: 0.75rem;
+  }
+  .post-body ul,
+  .post-body ol {
+    padding-left: 1.3rem;
+  }
+  .post-body ul {
+    list-style: square;
+  }
+  .post-body ol {
+    list-style: decimal;
+  }
+  .post-body li + li {
+    margin-top: 0.35rem;
+  }
+  .post-body strong {
+    font-weight: 600;
+  }
+  .post-body hr {
+    border: 0;
+    border-top: 1px dashed var(--rule);
+    margin-block: 3rem;
+  }
+  .post-body code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    background: var(--code-bg);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+    overflow-wrap: anywhere;
+  }
+  .post-body pre {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-blueprint);
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-2) transparent;
+    /* Scroll affordance: edge shadows appear only where code is clipped.
+       The paper-coloured covers scroll with the content and hide the
+       shadows once an edge is reached. */
+    background-image:
+      linear-gradient(to right, var(--paper-raised) 30%, transparent),
+      linear-gradient(to left, var(--paper-raised) 30%, transparent),
+      linear-gradient(to right, color-mix(in srgb, var(--ink) 16%, transparent), transparent),
+      linear-gradient(to left, color-mix(in srgb, var(--ink) 16%, transparent), transparent);
+    background-position: left center, right center, left center, right center;
+    background-size: 2.5rem 100%, 2.5rem 100%, 0.9rem 100%, 0.9rem 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+  }
+  @media (max-width: 40rem) {
+    .post-body pre {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      padding: 0.85rem 1rem 1rem;
+    }
+  }
+  .post-body .astro-code {
+    background-color: var(--paper-raised) !important;
+  }
+  :root[data-theme='dark'] .post-body .astro-code,
+  :root[data-theme='dark'] .post-body .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--paper-raised) !important;
+  }
+  :root[data-theme='dark'] .post-body .astro-code span {
+    background-color: transparent !important;
+  }
+  .post-body pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Wide figures: Markdown images (wrapped in <p>) and explicit <figure>s. */
+  .post-body figure,
+  .post-body p:has(> img:only-child) {
+    margin-block: 2.2rem;
+  }
+  .post-body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1.25px solid var(--ink);
+    border-radius: var(--radius-blueprint);
+    background: var(--paper-raised);
+  }
+  .post-body figcaption {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  @media (min-width: 64rem) {
+    .post-body figure,
+    .post-body p:has(> img:only-child) {
+      margin-inline: -6rem;
+    }
+  }
+
+  /* Pull quote: <aside class="pull"> */
+  .post-body .pull {
+    margin-block: 2.6rem;
+    padding: 1.2rem 0 1.2rem 1.4rem;
+    border-left: 3px solid var(--signal);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* Callout blockquote */
+  .post-body blockquote {
+    padding: 1rem 1.25rem;
+    border: 1px dashed var(--ink);
+    border-radius: var(--radius-blueprint);
+    background: var(--paper-raised);
+  }
+  .post-body blockquote > * + * {
+    margin-top: 0.8rem;
+  }
+  .post-body blockquote strong:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+
+  /* Tables: full-width ruled box. On narrow screens the table stays a real
+     table (so rows fill the column) and long cell text wraps instead. */
+  .post-body table {
+    width: 100%;
+    margin-block: 1.8rem;
+    border: 1.25px solid var(--ink);
+    border-radius: var(--radius-blueprint);
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--paper-raised);
+    font-size: 0.93rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 40rem) {
+    .post-body table {
+      font-size: 0.86rem;
+    }
+    .post-body table :is(th, td) {
+      padding: 0.5rem 0.55rem;
+      overflow-wrap: break-word;
+    }
+  }
+  .post-body th,
+  .post-body td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .post-body :is(th, td)[align='right'],
+  .post-body :is(th, td)[style*='right'] {
+    text-align: right;
+  }
+  .post-body th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-bottom: 1.25px solid var(--ink);
+  }
+  .post-body tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .post-body details {
+    font-size: 0.92rem;
+  }
+  .post-body summary {
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+  }
+}

@@ -1,0 +1,20 @@
+---
+/**
+ * Cloudflare Web Analytics (cookie-free JS beacon), for sites not proxied through Cloudflare.
+ * Renders only in production builds and only when PUBLIC_CF_BEACON_TOKEN is set.
+ */
+const token = import.meta.env.PUBLIC_CF_BEACON_TOKEN?.trim();
+const enabled = import.meta.env.PROD && Boolean(token);
+const beaconConfig = JSON.stringify({ token });
+---
+
+{
+  enabled && (
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={beaconConfig}
+    />
+  )
+}

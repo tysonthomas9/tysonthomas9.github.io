@@ -1,0 +1,49 @@
+# Build the Astro site and deploy it to GitHub Pages.
+# Follows Astro's GitHub Pages guide: https://docs.astro.build/en/guides/deploy/github/
+#
+# Before this can publish, set Settings → Pages → Source to "GitHub Actions".
+# Optional build-time variables (Settings → Secrets and variables → Actions → Variables):
+#   PUBLIC_CF_BEACON_TOKEN  Cloudflare Web Analytics token (empty = no analytics)
+#   PUBLIC_KIT_FORM_ID      Kit newsletter form ID (empty = no signup form)
+name: Deploy to GitHub Pages
+
+on:
+  # The site source and deployment branch.
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one deployment at a time; don't cancel a deployment that is in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v7
+      - name: Install, build, and upload your site
+        uses: withastro/action@v6
+        with:
+          node-version: 24
+        env:
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+          PUBLIC_KIT_FORM_ID: ${{ vars.PUBLIC_KIT_FORM_ID }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

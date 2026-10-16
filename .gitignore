@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables (never commit real tokens or IDs)
+.env
+.env.production
+.env.local
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Keep the Browser Operator articles local.
+src/content/blog/browser-operator-*/
